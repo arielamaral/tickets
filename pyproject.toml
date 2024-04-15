@@ -2,12 +2,17 @@
 name = "tickets"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Ariel Amaral <amaral.ariel95@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-
+flask = "^2.0.2"
+jira = "^3.0.1"
+gunicorn = "^20.1.0"
+polars = "^0.10.26"
+requests = "^2.26.0"
+mysql-connector-python = "^8.0.28"
 
 [build-system]
 requires = ["poetry-core"]
