@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
 from app.infrastructure.jira.services import JiraService
+from app.infrastructure.jira.base_url import base_url
 
 jira = Blueprint('jira', __name__)
 
-jira_service = JiraService(base_url="https://your-domain.atlassian.net/rest/servicedeskapi/", username="your-username", api_token="your-api-token")
+jira_service = JiraService(base_url, username="your-username", api_token="your-api-token")
 
 @jira.route('/issue', methods=['POST'])
 def create_issue():
