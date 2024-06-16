@@ -1,22 +1,31 @@
-# Use a imagem oficial do Python
-FROM python:3.12-slim-buster
+# Use a imagem base do Python
+FROM python:slim-bookworm
 LABEL authors="ariel"
 
-# Defina o diretório de trabalho no contêiner
+# Atualiza e instala dependências do sistema
+RUN apt-get update && \
+    apt-get install -y python3 python3-venv python3-pip python3-setuptools curl
+
+# Instalação do Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# Adiciona o diretório do Poetry ao PATH
+ENV PATH="/root/.local/bin:$PATH"
+
+# Define o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Instale o Poetry
-RUN pip install poetry
-
-# Copie o arquivo pyproject.toml para o diretório de trabalho
+# Copia o arquivo pyproject.toml e poetry.lock para o contêiner
 COPY pyproject.toml ./
 
-# Instale as dependências
-RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi
+# Instala as dependências usando Poetry
+RUN poetry install --no-root
 
-# Copie o restante do seu código para o diretório de trabalho
+# Copia o restante dos arquivos da aplicação
 COPY . .
 
-# Comando para executar o aplicativo
-CMD ["python", "./main.py"]
+# Define o Python path
+ENV PYTHONPATH=/app
+
+# Comando para iniciar a aplicação
+CMD ["python3", "app/__main__.py"]
