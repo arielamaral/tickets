@@ -1,4 +1,4 @@
-# Ticket Automation with Flask
+# Automação de Tickets em Jira Service Desk
 
 Este projeto é uma aplicação backend desenvolvida em Python utilizando o framework Flask. Ele oferece automações para facilitar o processo de resolução de tickets abertos no Jira Service Desk.
 
